@@ -4,13 +4,13 @@
       LOGO
     </div>
     <ul class="nav-list">
-      <li><mat-icon>dashboard</mat-icon> Dashboard</li>
-      <li><mat-icon>person</mat-icon> User</li>
+      <li routerLink="dashboard" routerLinkActive="active"><mat-icon>dashboard</mat-icon><span>Dashboard</span></li>
+      <li routerLink="user"><mat-icon>person</mat-icon><span>User</span></li>
     </ul>
   </mat-drawer>
 
   <mat-toolbar>
-    <mat-toolbar-row>
+    <mat-toolbar-row class="toolbar">
       <button mat-icon-button type="button" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
@@ -18,7 +18,9 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <router-outlet></router-outlet>
+  <main class="routing">
+    <router-outlet></router-outlet>
+  </main>
   
 
 </mat-drawer-container>
