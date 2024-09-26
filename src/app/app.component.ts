@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -13,5 +13,5 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'simpleCRM';
+  title = 'simplecrm';
 }
