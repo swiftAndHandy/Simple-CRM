@@ -1,5 +1,5 @@
 <mat-card appearance="outlined">
-    <mat-card-content>
+    <mat-card-content class="contact-wrapper">
         <table class="contact-table">
             <tbody>
                 <tr>
@@ -7,9 +7,19 @@
                     <th>E-Mail</th>
                     <th>City</th>
                 </tr>
-                <tr>
-                    <td></td>
-                </tr>
+                @for (contact of contacts; track contact) {
+                    <tr>
+                        <th>
+                            {{contact.name.first + '' + contact.name.last}}
+                        </th>
+                        <th>
+                            {{contact.mail}}
+                        </th>
+                        <th>
+                            {{contact.address.city}}
+                        </th>
+                    </tr>
+                }
             </tbody>
         </table>
     </mat-card-content>
