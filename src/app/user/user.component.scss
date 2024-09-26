@@ -5,3 +5,11 @@
         bottom: 64px;
     }
 }
+
+.contact-table {
+    width: 100%;
+    th {
+        text-align: start;
+        color: rgba($color: #000000, $alpha: 0.4);
+    }
+}

@@ -1,4 +1,4 @@
-import { ContactInterface } from "../interfaces/contact";
+import { ContactInterface } from "../interfaces/contact.interface";
 
 export class Contact {
 
@@ -6,23 +6,41 @@ export class Contact {
         first: '',
         last: '',
     };
-    birthdate: number | undefined;
+    mail: string;
+    birthdate: number | '';
     address: {
         street: string,
-        zip: number | undefined,
+        zip: number | '',
         city: string
     } = {
-        street: '',
-        zip: 0,
-        city: ''
-    }
+            street: '',
+            zip: 0,
+            city: ''
+        }
 
     constructor(contact?: ContactInterface) {
         this.name.first = contact?.name.first ? contact.name.first : '';
         this.name.last = contact?.name.last ? contact.name.last : '';
-        this.birthdate = contact?.birthdate ? contact.birthdate : undefined;
+        this.birthdate = contact?.birthdate ? contact.birthdate : '';
         this.address.street = contact?.address.street ? contact.address.street : '';
-        this.address.zip = contact?.address.zip ? contact.address.zip : undefined;
+        this.address.zip = contact?.address.zip ? contact.address.zip : '';
         this.address.city = contact?.address.city ? contact.address.city : '';
+        this.mail = contact?.mail ? contact.mail : '';
+    }
+
+    public toJason() {
+        return {
+            name: {
+                first: this.name.first,
+                last: this.name.last,
+            },
+            mail: this.mail,
+            birtdate: this.birthdate,
+            address: {
+                street: this.address.street,
+                zip: this.address.zip,
+                city: this.address.city
+            }
+        }
     }
 }

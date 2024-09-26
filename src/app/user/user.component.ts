@@ -4,21 +4,20 @@ import { MatIcon } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddUserComponent } from './dialogs/add-user/add-user.component';
-// import { Contact } from '../models/contact.class';
+import {MatCardModule} from '@angular/material/card';
+
+
 
 
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatButtonModule, MatIcon, MatTooltipModule, MatDialogModule],
+  imports: [MatButtonModule, MatIcon, MatTooltipModule, MatDialogModule, MatCardModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-
-  // contact: Contact = new Contact();
-
   readonly dialog = inject(MatDialog);
 
   openDialog() {

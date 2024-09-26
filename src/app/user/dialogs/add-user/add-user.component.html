@@ -1,19 +1,26 @@
-<h2 mat-dialog-title>Add User</h2>
+<div class="user-form">
+    <h2 mat-dialog-title>Add User</h2>
 <mat-dialog-content class="mat-typography">
     <div class="user-input__name">
         <mat-form-field class="user-input__first-name">
             <mat-label>First name</mat-label>
-            <input [(ngModel)]="contact.name.first" matInput placeholder="e. g. Kevin" value="">
+            <input [disabled]="loading" [(ngModel)]="contact.name.first" matInput placeholder="e. g. Kevin" value="">
         </mat-form-field>
         <mat-form-field class="user-input__last-name">
             <mat-label>Last name</mat-label>
-            <input [(ngModel)]="contact.name.last" matInput placeholder="e. g. Meyer" value="">
+            <input [disabled]="loading" [(ngModel)]="contact.name.last" matInput placeholder="e. g. Meyer" value="">
+        </mat-form-field>
+    </div>
+    <div class="user-input__mail">
+        <mat-form-field class="user-input__last-name">
+            <mat-label>E-Mail</mat-label>
+            <input [disabled]="loading" [(ngModel)]="contact.mail" matInput placeholder="k.meyer@example.com" value="">
         </mat-form-field>
     </div>
     <div class="user-input__birthdate">
         <mat-form-field>
             <mat-label>Birthdate</mat-label>
-            <input [(ngModel)]="birthdate" matInput [matDatepicker]="picker">
+            <input [disabled]="loading" [(ngModel)]="birthdate" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -21,21 +28,25 @@
     <div class="user-input__address">
         <mat-form-field class="user-input__address__street">
             <mat-label>Street + House No.</mat-label>
-            <input [(ngModel)]="contact.address.street" matInput placeholder="Address" value="">
+            <input [disabled]="loading" [(ngModel)]="contact.address.street" matInput placeholder="Address" value="">
         </mat-form-field>
         <div class="user-input__address__city-information">
             <mat-form-field class="user-input__address__zip">
                 <mat-label>ZIP Code</mat-label>
-                <input [(ngModel)]="contact.address.zip" matInput placeholder="e. g. 40491" value="">
+                <input [disabled]="loading" [(ngModel)]="contact.address.zip" matInput placeholder="e. g. 40491" value="">
             </mat-form-field>
             <mat-form-field class="user-input__address__city">
                 <mat-label>City</mat-label>
-                <input [(ngModel)]="contact.address.city" matInput placeholder="e. g. Stahlhofen" value="">
+                <input [disabled]="loading" [(ngModel)]="contact.address.city" matInput placeholder="e. g. Stahlhofen" value="">
             </mat-form-field>
         </div>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button (click)="saveContact()" [mat-dialog-close]="true">Save</button>
+    <button [disabled]="loading" mat-button mat-dialog-close>Cancel</button>
+    <button [disabled]="loading" mat-button (click)="saveContact()">Save</button>
 </mat-dialog-actions>
+</div>
+@if (loading) {
+    <mat-spinner class="loading-spinner"></mat-spinner>
+}

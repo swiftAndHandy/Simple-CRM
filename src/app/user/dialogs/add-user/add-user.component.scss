@@ -1,6 +1,23 @@
+.user-form {
+    position: relative;
+}
+
+.loading-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .user-input {
     &__first-name {
         margin-right: 8px;
+    }
+
+    &__mail {
+        > * {
+            width: 100%;
+        }
     }
 
     &__birthdate {
