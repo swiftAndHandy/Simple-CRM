@@ -1,0 +1,39 @@
+.contact-details__header { 
+    &-content {
+        background-color: rgb(230, 131, 3);
+        border-radius: 10px 10px 0 0;
+        height: 100%;
+        display: flex;
+        flex: 1;
+        padding-top: 32px;
+        padding-bottom: 16px;
+        align-items: flex-end;
+        * {
+            color: white;
+        }
+
+        .inner-wrapper {
+            display: flex;
+            height: 80px;
+            .contact-portrait {
+                border-radius: 100%;
+                object-fit: cover;
+                height: 80px;
+                width: 80px;
+            }
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 32px;
+                >h2 {
+                    margin-block: 0;
+                }
+            }
+        }
+    }
+}
+
+.contact-details__body {
+    margin-top: 24px;
+}

@@ -7,6 +7,7 @@ import { AddUserComponent } from './dialogs/add-user/add-user.component';
 import { MatCardModule } from '@angular/material/card';
 import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { ContactInterface } from '../interfaces/contact.interface';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,7 +16,7 @@ import { ContactInterface } from '../interfaces/contact.interface';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatButtonModule, MatIcon, MatTooltipModule, MatDialogModule, MatCardModule],
+  imports: [MatButtonModule, MatIcon, MatTooltipModule, MatDialogModule, MatCardModule, RouterModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -31,36 +32,28 @@ export class UserComponent {
   }
 
   subContacts() {
-
-    // return onSnapshot(collection(this.firestore, 'contacts'), (contacts) => {
-    //   this.contacts = [];
-    //   contacts.forEach(contact => {
-    //     this.contacts.push(contact.data());
-    //     this.contacts.forEach((contact) => console.log(contact));
-
-    //   });
-    // });
-
     return onSnapshot(collection(this.firestore, 'contacts'), (contacts) => {
+      this.contacts = [];
       contacts.forEach(contact => {
-        this.contacts.push(this.contactObject(contact.data()));
+        this.contacts.push(this.contactObject(contact));
       });
     });
-
   }
 
   contactObject(obj: any): ContactInterface {
+    const contact = obj.data();
     return {
-      'name': {
-        first: obj.name.first,
-        last: obj.name.last
+      id: obj.id,
+      name: {
+        first: contact.name.first,
+        last: contact.name.last
       },
-      mail: obj.mail,
-      birthdate: obj.birthdate,
+      mail: contact.mail,
+      birthdate: contact.birthdate,
       address: {
-        street: obj.address.street,
-        zip: obj.address.zip,
-        city: obj.address.city
+        street: contact.address.street,
+        zip: contact.address.zip,
+        city: contact.address.city
       }
     }
   }

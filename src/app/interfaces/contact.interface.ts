@@ -1,4 +1,5 @@
 export interface ContactInterface {
+    id?: string,
     name: {
         first?: string,
         last?: string

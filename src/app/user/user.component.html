@@ -8,9 +8,9 @@
                     <th>City</th>
                 </tr>
                 @for (contact of contacts; track contact) {
-                    <tr>
+                    <tr [routerLink]="contact.id">
                         <th>
-                            {{contact.name.first + '' + contact.name.last}}
+                            {{contact.name.first + ' ' + contact.name.last}}
                         </th>
                         <th>
                             {{contact.mail}}
