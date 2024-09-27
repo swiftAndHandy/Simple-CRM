@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
-export class UserComponent {
+export class ContactComponent {
   readonly dialog = inject(MatDialog);
   firestore: Firestore = inject(Firestore);
 

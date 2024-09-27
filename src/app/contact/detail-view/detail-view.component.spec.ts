@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailViewComponent } from './detail-view.component';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 describe('DetailViewComponent', () => {
   let component: DetailViewComponent;
@@ -8,9 +12,14 @@ describe('DetailViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetailViewComponent]
+      imports: [DetailViewComponent,
+        RouterModule.forRoot([]),
+      ],
+      providers: [
+        provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), provideFirestore(() => getFirestore())
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DetailViewComponent);
     component = fixture.componentInstance;

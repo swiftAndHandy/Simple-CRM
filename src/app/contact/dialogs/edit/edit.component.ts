@@ -29,15 +29,30 @@ export class EditContactComponent {
   id: string = '';
 
   ngOnInit() {
-    this.birthdate = new Date(this.contact.birthdate as number);
+    if (this.contact) {
+      this.birthdate = new Date(this.contact.birthdate as number);
+    } else {
+      this.contact = {
+        name: {
+          first: '',
+          last: ''
+        },
+        birthdate: new Date().getDate(),
+        address: {
+          street: '',
+          zip: undefined,
+          city: ''
+        }
+      }
+    }
   }
 
 
-  saveContact() {
-    this.loading = true;
-    this.dialog.close();
-    const ref = doc(collection(this.firestore, 'contacts'), this.id);
-    updateDoc(ref, this.contact as object);
+saveContact() {
+  this.loading = true;
+  this.dialog.close();
+  const ref = doc(collection(this.firestore, 'contacts'), this.id);
+  updateDoc(ref, this.contact as object);
 
-  }
+}
 }

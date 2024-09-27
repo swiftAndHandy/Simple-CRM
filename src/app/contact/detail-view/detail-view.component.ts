@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ContactInterface } from '../../interfaces/contact.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { EditContactComponent } from '../dialogs/edit/edit.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,15 +32,17 @@ export class DetailViewComponent {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
-
-    this.contactSnapshot = onSnapshot(doc(collection(this.firestore, 'contacts'), this.id), contact => {
-      this.contactInfo = this.setContactInfo(contact.data());
-    });
-
+    if (this.id) {
+      this.contactSnapshot = onSnapshot(doc(collection(this.firestore, 'contacts'), this.id), contact => {
+        this.contactInfo = this.setContactInfo(contact.data());
+      });
+    }
   }
 
   ngOnDestroy() {
-    this.contactSnapshot();
+    if (this.contactSnapshot) {
+      this.contactSnapshot();
+    }
   }
 
   setContactInfo(obj: any): ContactInterface {
@@ -59,7 +61,7 @@ export class DetailViewComponent {
     }
   }
 
-  editMenu(){
+  editMenu() {
     setTimeout(() => {
       const dialog = this.dialog.open(EditContactComponent);
       dialog.componentInstance.contact = new Contact(this.contactInfo).toJson() as ContactInterface;
