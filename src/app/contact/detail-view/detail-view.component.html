@@ -11,6 +11,12 @@
         </div>
     </mat-card-header>
     <mat-card-content class="contact-details__body">
+        <button mat-icon-button class="more" [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button (click)="editMenu()" mat-menu-item>Edit</button>
+        </mat-menu>
         <mat-card-title>Address</mat-card-title>
         @if (contactInfo) {
         <span>{{contactInfo['address'].street}}</span><br>

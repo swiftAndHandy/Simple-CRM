@@ -1,4 +1,4 @@
-.contact-details__header { 
+.contact-details__header {
     &-content {
         background-color: rgb(230, 131, 3);
         border-radius: 10px 10px 0 0;
@@ -26,7 +26,7 @@
                 flex-direction: column;
                 justify-content: center;
                 margin-left: 32px;
-                >h2 {
+                > h2 {
                     margin-block: 0;
                 }
             }
@@ -35,5 +35,12 @@
 }
 
 .contact-details__body {
+    position: relative;
     margin-top: 24px;
+
+    .more {
+        position: absolute;
+        top: 0;
+        right: 16px;
+    }
 }

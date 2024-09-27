@@ -16,12 +16,12 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
   standalone: true,
   providers: provideNativeDateAdapter(),
   imports: [MatDialogModule, MatButton, MatInputModule, MatFormFieldModule, FormsModule, MatDatepickerModule, MatProgressSpinnerModule],
-  templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.scss'
+  templateUrl: './add-contact.component.html',
+  styleUrl: './add-contact.component.scss'
 })
-export class AddUserComponent {
+export class AddContactComponent {
   firestore: Firestore = inject(Firestore);
-  dialog: MatDialogRef<AddUserComponent> = inject(MatDialogRef);
+  dialog: MatDialogRef<AddContactComponent> = inject(MatDialogRef);
   loading: boolean = false;
   contact: Contact = new Contact();
   birthdate: Date | undefined;

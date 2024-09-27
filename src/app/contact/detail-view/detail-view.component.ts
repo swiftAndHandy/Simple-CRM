@@ -3,18 +3,24 @@ import { collection, doc, DocumentData, Firestore, onSnapshot } from '@angular/f
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { ContactInterface } from '../../interfaces/contact.interface';
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { EditComponent } from '../dialogs/edit/edit.component';
 
 
 @Component({
   selector: 'app-detail-view',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
   templateUrl: './detail-view.component.html',
   styleUrl: './detail-view.component.scss'
 })
 export class DetailViewComponent {
+
+
+  readonly dialog = inject(MatDialog);
   private activatedRoute = inject(ActivatedRoute);
   private firestore = inject(Firestore)
 
@@ -25,7 +31,7 @@ export class DetailViewComponent {
     const id = this.activatedRoute.snapshot.params['id'];
 
     this.contactSnapshot = onSnapshot(doc(collection(this.firestore, 'contacts'), id), contact => {
-      this.contactInfo = this.setContactInfo(contact.data()) ;
+      this.contactInfo = this.setContactInfo(contact.data());
     });
 
   }
@@ -49,4 +55,12 @@ export class DetailViewComponent {
       }
     }
   }
+
+  editMenu(){
+    setTimeout(() => {
+      const dialog = this.dialog.open(EditComponent);
+      dialog.componentInstance.contact = this.contactInfo;
+    }, 10);
+  }
+
 }
