@@ -12,7 +12,7 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 
 
 @Component({
-  selector: 'app-add-user',
+  selector: 'app-add-contact',
   standalone: true,
   providers: provideNativeDateAdapter(),
   imports: [MatDialogModule, MatButton, MatInputModule, MatFormFieldModule, FormsModule, MatDatepickerModule, MatProgressSpinnerModule],
@@ -31,7 +31,7 @@ export class AddContactComponent {
     this.contact.birthdate = this.birthdate?.getTime() ? this.birthdate.getTime() : '';
     const col = collection(this.firestore, 'contacts');
     try {
-      addDoc(col, this.contact.toJason())
+      addDoc(col, this.contact.toJson())
       this.dialog.close();
     } catch (error) {
       console.warn(error);

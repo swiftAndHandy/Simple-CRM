@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { collection, doc, DocumentData, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { collection, doc, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { ContactInterface } from '../../interfaces/contact.interface';
@@ -7,13 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
-import { EditComponent } from '../dialogs/edit/edit.component';
+import { EditContactComponent } from '../dialogs/edit/edit.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Contact } from '../../models/contact.class';
 
 
 @Component({
   selector: 'app-detail-view',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule, MatFormFieldModule],
   templateUrl: './detail-view.component.html',
   styleUrl: './detail-view.component.scss'
 })
@@ -26,11 +28,12 @@ export class DetailViewComponent {
 
   contactSnapshot: any;
   contactInfo!: ContactInterface;
+  id: string = '';
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.activatedRoute.snapshot.params['id'];
 
-    this.contactSnapshot = onSnapshot(doc(collection(this.firestore, 'contacts'), id), contact => {
+    this.contactSnapshot = onSnapshot(doc(collection(this.firestore, 'contacts'), this.id), contact => {
       this.contactInfo = this.setContactInfo(contact.data());
     });
 
@@ -58,8 +61,9 @@ export class DetailViewComponent {
 
   editMenu(){
     setTimeout(() => {
-      const dialog = this.dialog.open(EditComponent);
-      dialog.componentInstance.contact = this.contactInfo;
+      const dialog = this.dialog.open(EditContactComponent);
+      dialog.componentInstance.contact = new Contact(this.contactInfo).toJson() as ContactInterface;
+      dialog.componentInstance.id = this.id;
     }, 10);
   }
 

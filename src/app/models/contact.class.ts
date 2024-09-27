@@ -28,14 +28,14 @@ export class Contact {
         this.mail = contact?.mail ? contact.mail : '';
     }
 
-    public toJason() {
+    public toJson() {
         return {
             name: {
                 first: this.name.first,
                 last: this.name.last,
             },
             mail: this.mail,
-            birtdate: this.birthdate,
+            birthdate: this.birthdate,
             address: {
                 street: this.address.street,
                 zip: this.address.zip,
